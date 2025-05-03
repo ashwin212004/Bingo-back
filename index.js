@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -9,7 +11,7 @@ const Gamef = require("./models/game");
 const { checkBingo } = require("./models/muti");
 const User = require("./models/usercontroller");
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -19,7 +21,7 @@ const io = new Server(server, {
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb+srv://ashwingonbhare890:TNtDy2lfPcbHnpVB@sem6bingo.d8vbe.mongodb.net/?retryWrites=true&w=majority&appName=sem6bingo');
+mongoose.connect(process.env.MONGO_URI)
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
